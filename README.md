@@ -66,6 +66,11 @@ laptop.
 To try the screens without any data: `Rscript dev/make_demo_study.R /tmp/AutoG-demo`, then
 `Rscript -e "shiny::runApp('app')"` and choose `/tmp/AutoG-demo` as the data folder.
 
+To try the whole pipeline without participant data, make a fully synthetic week and process it
+in the app: `Rscript dev/make_synthetic_recording.R /tmp/AutoG-try/CHILD/raw/K001_2026-01-15.csv 1 8 child`
+(about 420 MB; `adult` or `child`). It is generated from a simple daily schedule, not from any real
+recording, and is good for testing, teaching and screenshots only.
+
 ## Documentation
 
 | | |
