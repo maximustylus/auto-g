@@ -83,7 +83,7 @@ only** (sleep not trustworthy), **exclude** — each with the reason, written to
 1. Change made in `windows-app/` (and in `reference_pipeline.R` too if it is a pipeline setting).
 2. `Rscript tools/check_parity.R` → PARITY OK. Note the fingerprint.
 3. Bump `VERSION`; add the `CHANGELOG.md` entry with the fingerprint.
-4. `Rscript tools/make_infographic.R` and `Rscript tools/make_manual.R` (the PDFs print the app version; needs Chrome and the Mac
+4. `TZ=UTC Rscript tools/make_infographic.R`, `tools/make_manual.R` and `tools/make_playbook.R` (the PDFs print the app version; needs Chrome and the Mac
    test library: `R_LIBS_USER=~/AutoG-build/maclib`). Look at both PDFs.
 4b. `Rscript build_bundle.R`; read `BUILD_INFO.txt`. A "NOT from the lock" line means package
    versions changed: treat it as a change to verify (golden test) and record.

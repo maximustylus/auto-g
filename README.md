@@ -43,7 +43,8 @@ Light, dark and auto mode throughout, including the PDFs.
 AutoG was built by a clinician-researcher with an AI coding assistant, under a method that keeps
 people in charge of the science: one source of truth, fixed settings, numbers traced to their
 source, a person's verdict on every recording, and checks at every release. **[PLAYBOOK.md](PLAYBOOK.md)**
-describes it so it can be reused for other offline research pipelines. The roles and procedures
+describes it so it can be reused for other offline research pipelines. It is also a PDF:
+[light, for printing](docs/AutoG-playbook-light.pdf) or [dark](docs/AutoG-playbook-dark.pdf). The roles and procedures
 it describes are in [`.claude/`](.claude) and [`CLAUDE.md`](CLAUDE.md).
 
 ## Getting started
@@ -78,8 +79,9 @@ To try the screens without any data: `Rscript dev/make_demo_study.R /tmp/AutoG-d
 | [docs/BRAND.md](docs/BRAND.md) | Logo, colours, light and dark rules |
 | [docs/RUNBOOK.md](docs/RUNBOOK.md) | Install, run and troubleshoot on Windows |
 
-`tools/make_infographic.R` and `tools/make_manual.R` generate the two-page infographic and the
-technical manual as light and dark PDFs (they need Google Chrome on the build machine).
+`tools/make_infographic.R`, `tools/make_manual.R` and `tools/make_playbook.R` generate the
+two-page infographic, the technical manual and the playbook as light and dark PDFs (they need
+Google Chrome on the build machine; run them with `TZ=UTC`).
 
 ## Status and limits
 
