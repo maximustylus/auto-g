@@ -1,0 +1,16 @@
+AutoG
+Copyright 2026 the AutoG authors
+
+AutoG is a front end for GGIR. It does not contain or modify GGIR's code; the built bundle
+includes the unmodified GGIR 3.3-8 source package from CRAN.
+
+GGIR: Raw Accelerometer Data Analysis. van Hees V, Migueles J, Sabia S, Patterson M, Fang Z,
+Heywood J, Capdevila Pujol J, Kushleyeva L, Chen M, Yerramalla M, Bos P, Sanders T, Zhao C,
+Meneghel Danilevicz I, Barreto Mesquita V, Segantin G, Afolabi S, and contributors.
+Licensed under the Apache License 2.0. doi:10.5281/zenodo.1051064
+https://github.com/wadpac/GGIR
+
+The built bundle also contains R for Windows (GPL-2 | GPL-3) and the R packages listed in
+packages.lock, each under its own licence, recorded in its DESCRIPTION file.
+
+Icons: Font Awesome Free (via the R package fontawesome), icons under CC BY 4.0.

@@ -1,0 +1,19 @@
+# Study state and study data never go into the repository
+HANDOVER.md
+private/*
+!private/reference_results.template.md
+*.csv
+!templates/*.csv
+*.gt3x
+*.RData
+**/raw/
+**/ggir/
+**/reports/
+**/datasheet/
+
+# Built bundle and caches (made by build_bundle.R)
+R/
+packages/
+BUILD_INFO.txt
+.Rhistory
+.DS_Store
