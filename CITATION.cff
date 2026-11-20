@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use AutoG, please cite it, and cite GGIR and the version used."
+title: "AutoG: an offline, point-and-click front end for GGIR accelerometry"
+type: software
+authors:
+  - alias: maximustylus
+version: 0.16.0
+date-released: 2026-11-21
+license: Apache-2.0
+repository-code: "https://github.com/maximustylus/auto-g"
+keywords: [accelerometry, GGIR, ActiGraph, physical activity, sleep, offline, research software]
+references:
+  - type: software
+    title: "GGIR: Raw Accelerometer Data Analysis"
+    authors:
+      - family-names: van Hees
+        given-names: Vincent
+      - family-names: Migueles
+        given-names: Jairo
+      - family-names: Sabia
+        given-names: Séverine
+    doi: 10.5281/zenodo.1051064

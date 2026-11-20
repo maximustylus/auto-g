@@ -1,0 +1,44 @@
+name: checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: automated checks (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '4.5'
+      - name: Run tools/run_tests.R (base R, no packages)
+        run: Rscript tools/run_tests.R
+
+  pipeline:
+    name: GGIR pipeline on synthetic data (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    needs: tests
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '4.5'
+          use-public-rspm: true
+      - name: System libraries (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libpoppler-cpp-dev libmagick++-dev libcurl4-openssl-dev libssl-dev
+      - name: Set up AutoG (packages, GGIR 3.3-8)
+        run: Rscript setup.R
+      - name: Synthetic week through the real worker
+        run: Rscript tools/ci_pipeline_check.R

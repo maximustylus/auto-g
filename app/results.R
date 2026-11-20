@@ -207,7 +207,9 @@ draft_summary <- function(studydir, file, version) {
   have <- function(d) !is.null(d) && nrow(d) > 0
 
   src <- list()
-  num <- function(text, file, column) { src[[length(src) + 1]] <<- c(number = text, file = file, column = column); text }
+  num <- function(text, file, column) {                      # a value GGIR did not write shows as "not available", never as a gap
+    if (length(text) != 1 || is.na(text) || !nzchar(text) || text == "NA") text <- "not available"
+    src[[length(src) + 1]] <<- c(number = text, file = file, column = column); text }
   F2 <- "part2_summary.csv"; F4 <- "part4_nightsummary_sleep_cleaned.csv"; F6 <- "part6_summary.csv"; FQ <- "QC/data_quality_report.csv"
   F5P <- if (!is.null(f5p)) basename(f5p) else NA; F5D <- if (!is.null(f5d)) basename(f5d) else NA
   mod <- rs$cp[["mod"]]; lig <- rs$cp[["lig"]]
@@ -262,7 +264,8 @@ draft_summary <- function(studydir, file, version) {
     s
   }
 
-  rhythm <- if (activity_only) not_reportable else if (!have(p6)) "Rhythm results (Part 6) were not found for this file." else
+  rhythm <- if (activity_only) not_reportable else if (!have(p6)) "Rhythm results (Part 6) were not found for this file."
+    else if (!all(c("IS", "IV") %in% names(p6)) || anyNA(p6[1, c("IS", "IV")])) "GGIR did not compute rhythm measures for this recording (usually too few days)." else
     sprintf("Interdaily stability was %s and intradaily variability %s. The cosinor fit explained %s of the variance (R squared). Interdaily stability and intradaily variability depend on the light cut-point (%s mg here), so they are not comparable with values from another age group.",
             num(fmt(p6$IS[1], 3), F6, "IS"), num(fmt(p6$IV[1], 3), F6, "IV"), num(fmt(p6$cosinor_R2[1], 2), F6, "cosinor_R2"), lig)
 

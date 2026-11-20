@@ -1,6 +1,7 @@
 <p align="center"><img src="app/www/autog-icon.svg" width="96" alt="AutoG logo"></p>
 
 <h1 align="center">AutoG</h1>
+<p align="center"><a href="https://github.com/maximustylus/auto-g/actions/workflows/checks.yml"><img src="https://github.com/maximustylus/auto-g/actions/workflows/checks.yml/badge.svg" alt="checks"></a></p>
 <p align="center"><b>Accelerometry, automated.</b><br>
 An offline, point-and-click front end for <a href="https://github.com/wadpac/GGIR">GGIR</a>, built for locked-down laptops and people who don't code.</p>
 
@@ -49,27 +50,34 @@ it describes are in [`.claude/`](.claude) and [`CLAUDE.md`](CLAUDE.md).
 
 ## Getting started
 
-AutoG is built on a machine with internet (macOS was used) and installed on the offline Windows
-laptop.
+**Try it on your own computer** (Windows, macOS or Linux; needs R 4.3+ and internet once):
+
+```bash
+git clone https://github.com/maximustylus/auto-g.git
+cd auto-g
+Rscript setup.R
+```
+
+Then start it: on macOS double-click **Run AutoG.command** (first time: right-click, Open); on
+Linux run `./run-autog.sh`; anywhere, `Rscript app/launch.R`. Linux needs a few system libraries
+first (listed at the top of `setup.R`).
+
+No data at hand? `Rscript dev/make_demo_study.R /tmp/AutoG-demo` makes an invented study to click
+through, and `Rscript dev/make_synthetic_recording.R /tmp/AutoG-try/CHILD/raw/K001_2026-01-15.csv 1 8 child`
+makes a fully synthetic week (about 420 MB, `adult` or `child`) to run through GGIR end to end. It
+is generated from a simple daily schedule, not from any real recording.
+
+**Deploy it on a locked-down Windows laptop** (no internet, no admin rights):
 
 1. Adapt it: your studies and time zone in [`app/settings.R`](app/settings.R); read
    [`docs/PIPELINE.md`](docs/PIPELINE.md) before touching any cut-point. Rewrite
    [`docs/BIODESIGN.md`](docs/BIODESIGN.md) for your site's governance.
-2. Check it: `Rscript tools/run_tests.R` (74 checks on an invented study, no GGIR needed).
-3. Build the Windows bundle: `Rscript build_bundle.R` (needs R 4.5, internet and `innoextract`;
-   about 550 MB, written to `~/AutoG-build/AutoG`).
-4. Install on the laptop: copy the folder to `C:\AutoG` and double-click `Run AutoG.bat`
+2. Build the offline bundle on a machine with internet: `Rscript build_bundle.R` (needs R 4.5 and
+   `innoextract`; about 550 MB).
+3. Copy the folder to `C:\AutoG` and double-click `Run AutoG.bat`
    ([`docs/RUNBOOK.md`](docs/RUNBOOK.md); the infographic covers it step by step).
-5. Before any study data: process one recording you have checked by hand and record it as your
+4. Before any study data: process one recording you have checked by hand and record it as your
    golden test ([`docs/VERSIONING_QC.md`](docs/VERSIONING_QC.md)).
-
-To try the screens without any data: `Rscript dev/make_demo_study.R /tmp/AutoG-demo`, then
-`Rscript -e "shiny::runApp('app')"` and choose `/tmp/AutoG-demo` as the data folder.
-
-To try the whole pipeline without participant data, make a fully synthetic week and process it
-in the app: `Rscript dev/make_synthetic_recording.R /tmp/AutoG-try/CHILD/raw/K001_2026-01-15.csv 1 8 child`
-(about 420 MB; `adult` or `child`). It is generated from a simple daily schedule, not from any real
-recording, and is good for testing, teaching and screenshots only.
 
 ## Documentation
 
@@ -88,9 +96,17 @@ recording, and is good for testing, teaching and screenshots only.
 two-page infographic, the technical manual and the playbook as light and dark PDFs (they need
 Google Chrome on the build machine; run them with `TZ=UTC`).
 
+## Contributing
+
+Bug reports, testing on your own devices and systems, documentation and code are all welcome.
+Start with [CONTRIBUTING.md](CONTRIBUTING.md). The one rule above all: **never share participant
+data** in issues or pull requests. Every pull request is checked automatically on Windows, macOS
+and Linux, including a synthetic week processed through GGIR.
+
 ## Status and limits
 
-- Tested on macOS with GGIR 3.3.8 against real and simulated recordings. **Windows-specific
+- Developed and tested on macOS with GGIR 3.3.8 against real and simulated recordings; the
+  automated checks and a synthetic GGIR run also pass on Windows and Linux in GitHub Actions. **Windows-specific
   behaviour (stopping processes, detecting a stopped run, application control) is the least
   tested part**; check it on your own laptop before use (`docs/RUNBOOK.md`).
 - Developed with ActiGraph wGT3X-BT raw CSV exports. Other devices that GGIR reads should work but

@@ -4,6 +4,16 @@ Newest first. Every entry: version, what changed, the **settings fingerprint** (
 `tools/check_parity.R`), and whether results can change. Pipeline changes are marked **[SCIENCE]**.
 Before 0.16.0 AutoG was developed privately; those versions are summarised.
 
+## 0.17.0 — runs anywhere, open to contributors
+- `setup.R` and launchers for macOS (`Run AutoG.command`) and Linux (`run-autog.sh`); the app
+  launcher works both from the offline Windows bundle and from a normal R installation.
+- GitHub workflow: automated checks on Windows, macOS and Linux; a synthetic week through GGIR
+  on Windows and Linux (`tools/ci_pipeline_check.R`).
+- Fixed: for a recording too short for rhythm measures, the summary printed an empty sentence; it
+  now says GGIR did not compute them. 76 checks.
+- `CONTRIBUTING.md`, issue and pull-request templates, `CITATION.cff`.
+- Results cannot change.
+
 ## 0.16.0 — first public release
 - Settings fingerprint of this public copy: `675c9fd3ac26f6918431d051e57efa29` (example studies
   ADULT and CHILD). Your fingerprint changes when you edit `app/settings.R`; record it here.

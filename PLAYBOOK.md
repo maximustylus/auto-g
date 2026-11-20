@@ -81,7 +81,7 @@ stakeholders, risks and governance in `docs/BIODESIGN.md` and says build, build 
 
 | Check | Proves | When |
 |---|---|---|
-| `tools/run_tests.R` | The code that reads GGIR's results gives the right numbers, flags and blanks on a made-up study (74 checks, base R, seconds) | after every change to `app/results.R`, on both machines |
+| `tools/run_tests.R` | The code that reads GGIR's results gives the right numbers, flags and blanks on a made-up study (76 checks, base R, seconds) | after every change to `app/results.R`, on both machines |
 | `tools/check_parity.R` | The settings fingerprint; on the build machine, that the app's `GGIR()` call matches a reference script | every release; on the laptop after install |
 | Golden test | A real recording processed now gives the same numbers as when it was checked by hand | after every install; after any worker or settings change |
 | `dev/make_sim_study.R` | Whole runs survive awkward recordings: short, device off at night, a still day, very short and long nights, 30 Hz, cut-off file, with a diary | before a release that touches the worker or the night logic |

@@ -179,5 +179,13 @@ st <- read_run_state(sd)
 check("a recorded run is read back whole", st$pid == as.character(Sys.getpid()) && st$overwrite && identical(st$files, f[1:2]) && format(st$start, "%H:%M") == "09:00" && st$label == "Study ADULT")
 check("a live process is seen as alive, a made-up one is not", pid_alive(st$pid) && !pid_alive("999999") && !pid_alive("") && !pid_alive("abc"))
 
+section("Short recordings")
+p6_full <- utils::read.csv(file.path(res, "part6_summary.csv"))
+w(data.frame(ID = ids), "part6_summary.csv")                        # GGIR writes no IS/IV for a recording that is too short
+d6 <- draft_summary(sd, f[2 + 1], "9")
+check("no rhythm measures: the summary says so instead of leaving a gap", grepl("did not compute rhythm", d6$sections[["6. Rhythm"]]) && !grepl("stability was  and", d6$text))
+check("no rhythm measures: the datasheet leaves rhythm blank", is.na(build_datasheet(sd, f[3])$data$interdaily_stability))
+w(p6_full, "part6_summary.csv")
+
 cat(sprintf("\n%d checks, %d failed\n", n, length(fails)))
 if (length(fails)) { cat("FAILED:\n", paste0("  - ", fails, "\n"), sep = ""); quit(status = 1) }
